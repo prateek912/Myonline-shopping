@@ -1,4 +1,4 @@
-package com.pratik.spring.Backend_OnlineShopping;
+package com.spring.backend;
 
 /**
  * Hello world!

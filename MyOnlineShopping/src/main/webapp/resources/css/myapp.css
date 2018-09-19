@@ -26,10 +26,10 @@ body {
 .wrapper{
 	min-height: 100%;
 	position: relative;
-	border  : 1px solid red;
 }
 
 .content{
+	padding-top: 10px;
 	padding-bottom: 60px; /* height of footer */
 }
 
@@ -38,4 +38,3 @@ body {
 	bottom : 0;
 	width : 100%;
 }
-

@@ -19,6 +19,14 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- Linking BackEnd Project with FrontEnd -->
+		<dependency>
+			<groupId>com.spring</groupId>
+			<artifactId>Backend_OnlineShopping</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

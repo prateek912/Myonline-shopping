@@ -8,10 +8,17 @@ $(function(){
 		case 'About Page' :
 			$('#about').addClass('active');
 			break;
-			
-		default :
-			$('#home').addClass('active');
+		
+		case 'All Products' :
+			$('#viewProducts').addClass('active');
 			break;
+				
+		default :
+			$('#viewProducts').addClass('active');
+		 	// For activating selected category from side bar
+			$('#a_'+menu).addClass('active');
+			break;	
 				
 	}
 });
+

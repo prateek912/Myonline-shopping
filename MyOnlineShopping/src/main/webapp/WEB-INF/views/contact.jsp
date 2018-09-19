@@ -11,7 +11,8 @@
 		<div class="row">
 			<h1>Contact Us</h1>
 			<hr />
-			<p>For more detail please contact us on +91-8826545723</p>
+			<p>Mobile Number : +91-8826545723
+			Email id : sharma.prateek912@gmail.com</p>
 		</div>
 	</div>
 </body>
