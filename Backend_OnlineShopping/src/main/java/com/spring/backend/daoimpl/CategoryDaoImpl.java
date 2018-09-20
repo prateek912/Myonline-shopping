@@ -1,58 +1,74 @@
 package com.spring.backend.daoimpl;
 
-import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import com.spring.backend.dao.CategoryDao;
 import com.spring.backend.dto.Category;
 
 @Repository("catDao")
+//As we have @EnableTransactionalManager in Hibernate Configuration
+@Transactional
 public class CategoryDaoImpl implements CategoryDao{
 
-	static List<Category> categories =  new ArrayList<>();
-	static {
-		Category cat1 = new Category();
-		cat1.setId(1);
-		cat1.setName("Television");
-		cat1.setDescription("For watching!");
-		cat1.setActive(true);
-		cat1.setImgUrl("cat1.png");
-		
-		Category cat2 = new Category();
-		cat2.setId(2);
-		cat2.setName("XBox");
-		cat2.setDescription("For Gaming!");
-		cat2.setActive(true);
-		cat2.setImgUrl("cat2.png");
-		
-		Category cat3 = new Category();
-		cat3.setId(3);
-		cat3.setName("Mobile");
-		cat3.setDescription("For Everything!");
-		cat3.setActive(true);
-		cat3.setImgUrl("cat3.png");
-	
-		categories.add(cat1);
-		categories.add(cat2);
-		categories.add(cat3);
-		
-	}
+	@Autowired
+	private SessionFactory factory;
 	
 	@Override
 	public List<Category> getList() {
-		return categories;
+		// Writing HQL for selecting only active categories
+		String selectActiveCategories = "FROM Category where active =:active";
+		Query<Category> query = factory.getCurrentSession().createQuery(selectActiveCategories);
+		query.setParameter("active",true);
+	
+		return query.getResultList();
 	}
 
 	@Override
 	public Category getById(int id) {
-		for(Category cat : categories) {
-			if(cat.getId() == id) {
-				return cat;
-			}
+		// For getting single Category based on Id
+		return factory.getCurrentSession().get(Category.class,Integer.valueOf(id));
+	}
+
+	@Override
+	public boolean addCategory(Category cat) {
+		try {
+			// Adding Category
+			Session session =factory.getCurrentSession();
+			session.persist(cat);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		
-		// If nothing matches
-		return null;
+	}
+
+	@Override
+	public boolean updateCategory(Category cat) {
+		try {
+			factory.getCurrentSession().update(cat);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteCategory(Category cat) {
+		// We are not deleting the Category, we are just setting active status as false
+		cat.setActive(false);
+		try {
+			factory.getCurrentSession().update(cat);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

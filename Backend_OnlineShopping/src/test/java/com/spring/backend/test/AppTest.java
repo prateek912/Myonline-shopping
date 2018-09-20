@@ -1,4 +1,4 @@
-package com.pratik.spring.Backend_OnlineShopping;
+package com.spring.backend.test;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

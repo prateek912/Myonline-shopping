@@ -5,17 +5,20 @@
 	<groupId>com.spring</groupId>
 	<artifactId>MyOnlineShopping</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>MyOnlineShopping Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<!-- Mentioning all the version of Jar here only -->
 	<properties>
 		<javax_Servlet.version>3.1.0</javax_Servlet.version>
-		<junit.version>3.8.1</junit.version>
+		<junit.version>4.12</junit.version>
 		<spring-mvc.version>4.3.6.RELEASE</spring-mvc.version>
 		<jstl.version>1.2</jstl.version>
 		<javax-servlet.version>2.0</javax-servlet.version>
+		<h2db.version>1.4.194</h2db.version>
+		<hibernate.version>5.2.7.Final</hibernate.version>
+		<spring-orm.version>4.3.6.RELEASE</spring-orm.version>
 	</properties>
 
 	<dependencies>
@@ -62,6 +65,29 @@
 			<version>${javax-servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2db.version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring-orm.version}</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
