@@ -22,7 +22,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	public List<Category> getList() {
 		// Writing HQL for selecting only active categories
 		String selectActiveCategories = "FROM Category where active =:active";
-		Query<Category> query = factory.getCurrentSession().createQuery(selectActiveCategories);
+		Query<Category> query = factory.getCurrentSession().createQuery(selectActiveCategories,Category.class);
 		query.setParameter("active",true);
 	
 		return query.getResultList();
