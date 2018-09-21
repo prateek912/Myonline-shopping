@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Product {
 	@Id
@@ -16,15 +18,19 @@ public class Product {
 	private String code;
 	private String name;
 	private String brand;
+	@JsonIgnore
 	private String description;
 	@Column(name="unit_price")
-	private double unitprice;
-	private int quantity;
+	private Double unitprice;
+	private Integer quantity;
 	@Column(name="is_active")
+	@JsonIgnore
 	private boolean active=true;
 	@Column(name="category_id")
+	@JsonIgnore
 	private int categoryid;
 	@Column(name="supplier_id")
+	@JsonIgnore
 	private int supplierId;
 	private int purchases;
 	private int views;
@@ -62,18 +68,6 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public double getUnitprice() {
-		return unitprice;
-	}
-	public void setUnitprice(double unitprice) {
-		this.unitprice = unitprice;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 	public boolean isActive() {
 		return active;
 	}
@@ -103,6 +97,21 @@ public class Product {
 	}
 	public void setViews(int views) {
 		this.views = views;
+	}
+	public Double getUnitprice() {
+		return unitprice;
+	}
+
+	public void setUnitprice(Double unitprice) {
+		this.unitprice = unitprice;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	@Override

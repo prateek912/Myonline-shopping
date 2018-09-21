@@ -1,12 +1,10 @@
 package com.spring.backend.test;
 
 import static org.junit.Assert.assertEquals;
-
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import com.spring.backend.dao.ProductDao;
 import com.spring.backend.dto.Product;
 
@@ -45,23 +43,49 @@ public class ProductTest {
 		
 		
 		// For fetching and updating product
-		Product fetchProduct = productDao.getProductById(6);
+		Product fetchProduct = productDao.getProductById(8);
 		fetchProduct.setBrand("Logitech");
 		
-		assertEquals("Successfully Fetched and Updated!!",true,productDao.updateProduct(fetchProduct));
+		assertEquals("Something went wrong while Fetched and Updated!!",true,productDao.updateProduct(fetchProduct));
 		
 		// For Deleting or De-activating Product
-		assertEquals("Successfully De-Activated!!",true,productDao.deleteProduct(fetchProduct));
+		assertEquals("Something went wrong while De-Activated!!",true,productDao.deleteProduct(fetchProduct));
 		
 		// Get All Products
-		assertEquals("Fetched All Products",6,productDao.getAllProducts().size());
+		assertEquals("Something went wrong while Fetching All Products",6,productDao.getAllProducts().size());
 		
 		// Get All Active Products
-		assertEquals("Fetched All Active Products",5,productDao.getListOfActiveProducts().size());
+		assertEquals("Something went wrong while Fetching All Active Products",5,
+					productDao.getListOfActiveProducts().size());
 		
 		// Get All active Product of Particular Category
-		assertEquals("Fetched All Active Products Of Category",2,productDao.getListOfActiveProductsByCategory(3).size());
+		assertEquals("Something went wrong while Fetching All Active Products Of Category",3,
+				productDao.getListOfActiveProductsByCategory(3).size());
 	}
 	
+	// Testing Business Specific Methods
+	@Test
+	@Ignore
+	public void testListOfActiveProduct() {
+		// Get All Active Products
+		assertEquals("Something went wrong while Fetching All Active Products",5,
+					productDao.getListOfActiveProducts().size());
+	}
+	
+	@Test
+	@Ignore
+	public void testListOfActiveProductByCategory() {
+		// Get All Active Products by category Id
+				assertEquals("Something went wrong while Fetching All Active Products Of Category",2,
+							productDao.getListOfActiveProductsByCategory(1).size());
+	}
+	
+	@Test
+	@Ignore
+	public void testActiveLastestProducts() {
+		// Get All Active Products by category Id
+				assertEquals("Something went wrong while Fetching All Active Latest Products",3,
+							productDao.getActiveLastestProducts(3).size());
+	}
 	
 }

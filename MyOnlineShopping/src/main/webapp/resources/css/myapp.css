@@ -24,6 +24,7 @@ body {
 */
 
 .wrapper{
+	border : 1px solid red;
 	min-height: 100%;
 	position: relative;
 }
@@ -34,7 +35,25 @@ body {
 }
 
 .footer{
-	position: absolute;
 	bottom : 0;
 	width : 100%;
+}
+
+footer{
+	border : 1px solid blue;
+}
+
+.dataTableImg{
+	width : 50px;
+	height : 50px;
+}
+
+.singleProductImg{
+	widht : 250 px;
+	height : 250px;
+	
+}
+
+.help-block{
+	color : red;	
 }
