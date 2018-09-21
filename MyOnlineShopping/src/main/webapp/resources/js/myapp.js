@@ -80,7 +80,7 @@ if($table.length){
 					if(data > 0){
 						return data;
 					}else{
-						return '<span style="color : red">Product Not Available! </span>';
+						return '<span style="color : red">Out of Stock! </span>';
 					}
 				}
 			},
@@ -93,10 +93,10 @@ if($table.length){
 					str += '<a href="'+window.contextRoot+'/show/'+data+'/product" class="btn btn-primary">'+
 											'View</a>'+' ';
 					if(window.quantity > 0){
-						str += '<a href="'+window.contextRoot+'/cart/add/'+data+'/product"class="btn btn-success">'+
+						str +='<a href="'+window.contextRoot+'/cart/add/'+data+'/product"class="btn btn-success">'+
 						'Add To Cart</a>';
 					}else{
-						str += '<a href="'+window.contextRoot+'/cart/add/'+data+
+						str +='<a href="'+window.contextRoot+'/cart/add/'+data+
 						'/product" class="btn btn-success disabled">'+
 						'Add To Cart</a>';
 					}

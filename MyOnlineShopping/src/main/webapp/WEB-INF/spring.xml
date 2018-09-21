@@ -25,9 +25,12 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-
 	<!-- To Load Static resources -->
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
 	
+	<!-- For Uploading file/image -->
+	<!-- Id should always be the one mentione below -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+
 </beans>   

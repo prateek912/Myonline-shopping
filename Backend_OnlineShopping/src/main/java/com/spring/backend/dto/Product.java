@@ -1,12 +1,15 @@
 package com.spring.backend.dto;
 
 import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,13 +19,18 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String code;
+	@NotBlank(message="Please enter the Product Name")
 	private String name;
+	@NotBlank(message="Please enter the Product Brand")
 	private String brand;
 	@JsonIgnore
+	@NotBlank(message="Product Description is requried")
 	private String description;
+	@Min(value=1,message="Price can't be less than 1")
 	@Column(name="unit_price")
 	private Double unitprice;
-	private Integer quantity;
+	@Min(value=0,message="Price can't be less than 0")
+	private int quantity;
 	@Column(name="is_active")
 	@JsonIgnore
 	private boolean active=true;
@@ -35,11 +43,21 @@ public class Product {
 	private int purchases;
 	private int views;
 	
+	// For uploading image from Admin console
+	@Transient
+	private MultipartFile file;
+	
 	// For Generating Unique code for every Product
 	public Product() {
 		this.code = "PRD-"+UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public int getId() {
 		return id;
 	}
@@ -105,12 +123,10 @@ public class Product {
 	public void setUnitprice(Double unitprice) {
 		this.unitprice = unitprice;
 	}
-
-	public Integer getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
-
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 

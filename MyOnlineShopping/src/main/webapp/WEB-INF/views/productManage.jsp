@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring-form"
 	uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -15,13 +16,26 @@
 			<div class="com-md-offset-2 col-md-8">
 				<!-- For Success Alert -->
 				<c:if test="${not empty message}">
-					<div class="col-xs-12">
-						<div class="alert alert-success alert-dismissible">
-							<button type="button" class="close" data-dimiss="alert">
-								&times;</button>
-							${message}
-						</div>
-					</div>
+					<c:choose>
+						<c:when test="${fn:containsIgnoreCase(message,'Wrong')}">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible">
+									<button type="button" class="close" data-dimiss="alert">
+										&times;</button>
+									${message}
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible">
+									<button type="button" class="close" data-dimiss="alert">
+										&times;</button>
+									${message}
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</c:if>
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -31,7 +45,8 @@
 					<div class="panel-body">
 						<!-- form elements -->
 						<spring-form:form class="form-horizontal" modelAttribute="product"
-							action="${contextRoot}/manage/products" method="post">
+							action="${contextRoot}/manage/products" method="post"
+								enctype="multipart/form-data">
 							<!-- For Product Name -->
 							<div class="form-group">
 								<div class="row">
@@ -40,7 +55,8 @@
 									<div class="col-md-8">
 										<spring-form:input type="text" path="name" id="name"
 											placeholder="Enter Product Name!" class="form-control" />
-										<em class="help-block">Please enter the Product name</em>
+										<spring-form:errors path="name" cssClass="help-block"
+											element="em" />
 									</div>
 								</div>
 							</div>
@@ -52,7 +68,8 @@
 									<div class="col-md-8">
 										<spring-form:input type="text" path="brand" id="brand"
 											placeholder="Enter Brand Name!" class="form-control" />
-										<em class="help-block">Please enter the Brand name</em>
+										<spring-form:errors path="brand" cssClass="help-block"
+											element="em" />
 									</div>
 								</div>
 							</div>
@@ -64,7 +81,8 @@
 									<div class="col-md-8">
 										<spring-form:textarea rows="4" cols="50" path="description"
 											id="description" class="form-control"></spring-form:textarea>
-										<em class="help-block">Please enter Product Description!!</em>
+										<spring-form:errors path="description" cssClass="help-block"
+											element="em" />
 									</div>
 								</div>
 							</div>
@@ -77,7 +95,8 @@
 										<spring-form:input type="number" path="unitprice"
 											id="unitprice" placeholder="Price in Rupees "
 											class="form-control" />
-										<em class="help-block">Please enter Price of Product!!</em>
+										<spring-form:errors path="unitprice" cssClass="help-block"
+											element="em" />
 									</div>
 								</div>
 							</div>
@@ -90,12 +109,25 @@
 										<spring-form:input type="number" path="quantity" id="quantity"
 											placeholder="Enter Available Quantity of Product"
 											class="form-control" />
-										<em class="help-block">Please enter Quantities of
-											Product!!</em>
+										<spring-form:errors path="quantity" cssClass="help-block"
+											element="em" />
 									</div>
 								</div>
 							</div>
-							<!-- For Quantity -->
+							<!-- For Image  -->
+							<div class="form-group">
+								<div class="row">
+									<label class="control-label col-md-4" for="name">
+										Select an Image </label>
+									<div class="col-md-8">
+										<spring-form:input type="file" path="file" id="file"
+											placeholder="Upload image of the Product"
+											class="form-control" />
+										<spring-form:errors path="file" cssClass="help-block" element="em"/>	
+									</div>
+								</div>
+							</div>
+							<!-- For Categories -->
 							<div class="form-group">
 								<div class="row">
 									<label class="control-label col-md-4" for="name">
@@ -104,8 +136,6 @@
 										<spring-form:select path="categoryid" id="categoryid"
 											class="form-control" items="${categories}" itemLabel="name"
 											itemValue="id" />
-										<em class="help-block">Please select at-least one
-											category</em>
 									</div>
 								</div>
 							</div>
