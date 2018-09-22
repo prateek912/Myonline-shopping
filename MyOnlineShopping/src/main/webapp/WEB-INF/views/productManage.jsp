@@ -230,13 +230,13 @@
 						<!-- Category form -->
 						<spring-form:form modelAttribute="category"
 							action="${contextRoot}/manage/category" method="post"
-							class="form-horizontal">
+							class="form-horizontal" id="cat_form">
 
 							<div class="form-group">
 								<label class="control-label col-md-4">Name</label>
 								<div class="col-md-8 validate">
 									<spring-form:input type="text" path="name" class="form-control"
-										placeholder="Category Name" />
+										placeholder="Category Name" id="cat_name"/>
 								</div>
 							</div>
 
@@ -244,7 +244,7 @@
 								<label class="control-label col-md-4">Description</label>
 								<div class="col-md-8 validate">
 									<spring-form:textarea path="description" class="form-control"
-										placeholder="Enter category description here!" />
+										placeholder="Enter category description here!" id="cat_description"/>
 								</div>
 							</div>
 

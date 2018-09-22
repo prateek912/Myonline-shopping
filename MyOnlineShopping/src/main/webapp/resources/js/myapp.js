@@ -235,3 +235,45 @@ if($alert.length){
 	}, 3000);
 }
 
+
+// For Validation of Admin Category Add form
+var $cateogryForm = $('#cat_form');
+if($cateogryForm.length){
+	$cateogryForm.validate({
+		rules: {
+			name: {
+				required: true,
+				minlength: 3
+			},
+			description: {
+				required: true,
+				minlength: 3					
+			}				
+		},
+		messages: {					
+			name: {
+				required: 'Please enter product name!',
+				minlength: 'Please enter atleast three characters'
+			},
+			description: {
+				required: 'Please enter product name!',
+				minlength: 'Please enter atleast three characters'
+			}					
+		},
+		
+		errorElement : "em",
+		errorPlacement : function(error, element) {
+			// Add the 'help-block' class to the error element
+			error.addClass("help-block");
+			
+			// add the error label after the input element
+			error.insertAfter(element);
+			
+			
+			// add the has-feedback class to the
+			// parent div.validate in order to add icons to inputs
+			element.parents(".validate").addClass("has-feedback");	
+
+		}	
+	});
+}
