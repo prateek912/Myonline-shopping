@@ -9,12 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.NotBlank;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Product {
+	
+	//For logging
+	private static final Logger logger = LoggerFactory.getLogger(Product.class);
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -32,7 +38,6 @@ public class Product {
 	@Min(value=0,message="Price can't be less than 0")
 	private int quantity;
 	@Column(name="is_active")
-	@JsonIgnore
 	private boolean active=true;
 	@Column(name="category_id")
 	@JsonIgnore
@@ -49,7 +54,7 @@ public class Product {
 	
 	// For Generating Unique code for every Product
 	public Product() {
-		this.code = "PRD-"+UUID.randomUUID().toString().substring(26).toUpperCase();
+		this.code = "PRD"+UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 	
 	public MultipartFile getFile() {
@@ -135,7 +140,6 @@ public class Product {
 		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", brand=" + brand + ", description="
 				+ description + ", unitprice=" + unitprice + ", quantity=" + quantity + ", active=" + active
 				+ ", categoryid=" + categoryid + ", supplierId=" + supplierId + ", purchases=" + purchases + ", views="
-				+ views + "]";
+				+ views + ", file=" + file + "]";
 	}
-	
 }

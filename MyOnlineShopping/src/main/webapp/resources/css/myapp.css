@@ -57,3 +57,9 @@ footer{
 .help-block{
 	color : red;	
 }
+
+.adminDataTableImg{
+	height: 50px;
+	width : 50px;
+}
+

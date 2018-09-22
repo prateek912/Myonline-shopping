@@ -41,6 +41,7 @@ public class FileUploadUtility {
 		
 		try {
 			// Transferring files 2 times, one to server and one to project development location
+			logger.info("Uploaded file name :"+code+".jpg");
 			file.transferTo(new File(real_path+code+".jpg"));
 			file.transferTo(new File(absolute_path+code+".jpg"));
 			

@@ -4,6 +4,8 @@ import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class HibernateConfig {
 
+	// For loggin
+	private static final Logger logger = LoggerFactory.getLogger(HibernateConfig.class);
+	
 	private final static String dbUrl="jdbc:h2:tcp://localhost/~/Myonlineshopping";
 	private final static String dbDialect="org.hibernate.dialect.H2Dialect";
 	private final static String dbDriver="org.h2.Driver";
@@ -51,8 +56,10 @@ public class HibernateConfig {
 	private Properties getHibernateProperties() {
 		Properties props = new Properties();
 		props.put("hibernate.dialect",dbDialect);
-		props.put("hibernate.show_sql","true");
-		props.put("hibernate.format_sql","true");
+		if(logger.isDebugEnabled()) {
+			props.put("hibernate.show_sql","true");
+			props.put("hibernate.format_sql","true");
+		}
 		
 		return props;
 	}

@@ -94,6 +94,8 @@
 		<script src="${js}/jquery.dataTables.js"></script>
 		<!-- JQuery DataTable Design -->
 		<script src="${js}/dataTables.bootstrap4.js"></script>
+		<!-- Bootbox for alert and dialog box -->
+		<script src="${js}/bootbox.min.js"></script>
 		<!-- Linking my own JS file -->
 		<script src="${js}/myapp.js"></script>
 	</div>

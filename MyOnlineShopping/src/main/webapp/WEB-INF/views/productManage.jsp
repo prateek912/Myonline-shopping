@@ -12,6 +12,7 @@
 </head>
 <body>
 	<div class="container">
+		<!-- Admin Form for adding new Product or Editing existing one -->
 		<div class="row">
 			<div class="com-md-offset-2 col-md-8">
 				<!-- For Success Alert -->
@@ -46,7 +47,7 @@
 						<!-- form elements -->
 						<spring-form:form class="form-horizontal" modelAttribute="product"
 							action="${contextRoot}/manage/products" method="post"
-								enctype="multipart/form-data">
+							enctype="multipart/form-data">
 							<!-- For Product Name -->
 							<div class="form-group">
 								<div class="row">
@@ -117,13 +118,14 @@
 							<!-- For Image  -->
 							<div class="form-group">
 								<div class="row">
-									<label class="control-label col-md-4" for="name">
-										Select an Image </label>
+									<label class="control-label col-md-4"> Select an Image
+									</label>
 									<div class="col-md-8">
 										<spring-form:input type="file" path="file" id="file"
 											placeholder="Upload image of the Product"
 											class="form-control" />
-										<spring-form:errors path="file" cssClass="help-block" element="em"/>	
+										<spring-form:errors path="file" cssClass="help-block"
+											element="em" />
 									</div>
 								</div>
 							</div>
@@ -136,6 +138,17 @@
 										<spring-form:select path="categoryid" id="categoryid"
 											class="form-control" items="${categories}" itemLabel="name"
 											itemValue="id" />
+
+										<!-- Show this Add Category Button, only for new product -->
+										<c:if test="${product.id == 0}">
+											<div class="text-right">
+												<br />
+												<button type="button" data-toggle="modal"
+													data-target="#myCategoryModal"
+													class="btn btn-warning btn-xs">Add New Category</button>
+											</div>
+
+										</c:if>
 									</div>
 								</div>
 							</div>
@@ -144,9 +157,9 @@
 								<div class="col-md-offset-4 col-md-8">
 									<input type="submit" name="submit" id="submit" value="Submit"
 										class="btn btn-primary" />
+									<hr />
 								</div>
 							</div>
-
 							<!-- Hidden Filed to populated form again when click on edit -->
 							<spring-form:hidden path="id" />
 							<spring-form:hidden path="code" />
@@ -156,6 +169,96 @@
 							<spring-form:hidden path="purchases" />
 
 						</spring-form:form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Admin table where admin can view all the product that are presernt in Database -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="row">
+					<h3>Available Products</h3>
+					<hr />
+				</div>
+				<div class="row">
+					<div style="overflow: auto">
+						<table id="adminProductTable"
+							class="table table-stripped table-bordered">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>&#160;</th>
+									<th>Name</th>
+									<th>Brand</th>
+									<th>Unit Price</th>
+									<th>Quantity</th>
+									<th>Active</th>
+									<th>Edit</th>
+								</tr>
+							</thead>
+							<!-- Table Body -->
+							<!-- Will be filled by JS -->
+							<tfoot>
+								<tr>
+									<th>Id</th>
+									<th>&#160;</th>
+									<th>Name</th>
+									<th>Brand</th>
+									<th>Unit Price</th>
+									<th>Quantity</th>
+									<th>Active</th>
+									<th>Edit</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Dialog box for adding new category -->
+		<div class="modal fade" id="myCategoryModal" role="dialog"
+			tabindex="-1" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						
+						<h4 class="modal-title">Add New Category</h4>
+					</div>
+					<div class="modal-body">
+						<!-- Category form -->
+						<spring-form:form modelAttribute="category"
+							action="${contextRoot}/manage/category" method="post"
+							class="form-horizontal">
+
+							<div class="form-group">
+								<label class="control-label col-md-4">Name</label>
+								<div class="col-md-8 validate">
+									<spring-form:input type="text" path="name" class="form-control"
+										placeholder="Category Name" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-md-4">Description</label>
+								<div class="col-md-8 validate">
+									<spring-form:textarea path="description" class="form-control"
+										placeholder="Enter category description here!" />
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-md-offset-4 col-md-4">
+									<input type="submit" name="submit" value="Save"
+										class="btn btn-primary" />
+								</div>
+							</div>
+						</spring-form:form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
