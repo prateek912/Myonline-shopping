@@ -13,13 +13,14 @@
 			</div>
 			<div class="panel-body">
 				<!-- Code to display user information -->
-				<div class="text-cetner">
+				<div class="text-cetner" align="left">
 					<h4>${registerModel.user.firstName} ${registerModel.user.lastName}</h4>
 					<h5>${registerModel.user.email}</h5>
 					<h5>${registerModel.user.contactNumber}</h5>
+					<h5>Role : ${registerModel.user.role}</h5>
 				</div>
 			</div>
-			<div class="panel-footer">
+			<div class="panel-footer" align="center">
 				<!-- Anchor tag to move to Edit personal information -->
 				<a href="${flowExecutionUrl}&_eventId_personal" class="btn btn-primary">Edit</a>
 			</div>
@@ -35,13 +36,13 @@
 			</div>
 			<div class="panel-body">
 				<!-- Code to display user billing address -->
-				<div class="text-cetner">
+				<div class="text-cetner" align="right">
 					<h4>${registerModel.address.addresslineOne}</h4>
 					<h5>${registerModel.address.addresslineTwo}</h5>
 					<h5>${registerModel.address.city} - ${registerModel.address.state} - ${registerModel.address.country}</h5>
 				</div>
 			</div>
-			<div class="panel-footer">
+			<div class="panel-footer" align="center">
 				<a href="${flowExecutionUrl}&_eventId_billing" class="btn btn-primary">Edit</a>
 			</div>
 		</div>
@@ -51,7 +52,7 @@
 <div class="row" align="center">
 	<div class="col-sm-4 col-sm-offset-4">
 		<div class="text-center" align="center">
-			<a href="${flowExecutionUrl}&_eventId_success" class="btn btn-primary">Confirm</a>
+			<a href="${flowExecutionUrl}&_eventId_submit" class="btn btn-primary">Confirm</a>
 		</div>
 	</div>
 </div>

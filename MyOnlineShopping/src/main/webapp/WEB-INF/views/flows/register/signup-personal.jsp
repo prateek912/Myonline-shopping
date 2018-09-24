@@ -97,6 +97,20 @@
 								</div>
 							</div>
 						</div>
+						<!-- For User Confirm Password -->
+						<div class="form-group">
+							<div class="row">
+								<label class="control-label col-md-4" for="name">
+									Confirm Password </label>
+								<div class="col-md-8">
+									<spring-form:input type="password" path="confirmPassword"
+										id="confirmPassword" placeholder="Enter password again!"
+										class="form-control" />
+									<spring-form:errors path="confirmPassword" cssClass="help-block"
+										element="em" />
+								</div>
+							</div>
+						</div>
 						<!-- For submission Button -->
 						<div class="form-group">
 							<div class="col-md-offset-4 col-md-8">

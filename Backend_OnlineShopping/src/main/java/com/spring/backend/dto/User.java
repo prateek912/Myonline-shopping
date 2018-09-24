@@ -10,6 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="user_detail")
@@ -19,21 +25,36 @@ public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotBlank(message="Please enter Your First Name")
 	@Column(name="first_name")
 	private String firstName;
+	@NotBlank(message="Please enter Your Last Name")
 	@Column(name="last_name")
 	private String lastName;
+	@Email(message="Please enter Your email id")
 	private String email;
+	@NotBlank(message="Please enter Your Contact Number")
 	@Column(name="contact_number")
 	private String contactNumber;
 	private String role;
+	@NotBlank(message="Please enter Your desired password")
 	private String password;
 	private boolean enabled = true;
 	
+	// Confirm password transient file
+	@Transient
+	private String confirmPassword;
+
 	// Cascade to make sure child cart table get all operation automatically 
 	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
 	private Cart cart;
-	
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 	public Cart getCart() {
 		return cart;
 	}

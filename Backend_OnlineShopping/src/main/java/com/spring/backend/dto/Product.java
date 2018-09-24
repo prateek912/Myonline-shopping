@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Product {
-	
+
 	//For logging
 	private static final Logger logger = LoggerFactory.getLogger(Product.class);
 	
