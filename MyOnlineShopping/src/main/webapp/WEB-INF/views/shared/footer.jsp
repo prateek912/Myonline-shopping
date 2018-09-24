@@ -7,17 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- Footer  -->
 	<div class="footer">
-		<hr />
-		<footer class="py-5 bg-dark">
+		<footer class="page-footer font-small blue"
+			style="background-color: #343a40">
 			<div class="container">
-				<p class="m-0 text-center text-white">Copyright &copy; Your
-					Website 2018</p>
+				<p class="footer-copyright text-center py-3" align="center">Copyright &copy;
+					onlineshopping.com</p>
 			</div>
 			<!-- /.container -->
 		</footer>
-
 	</div>
 </body>
 </html>

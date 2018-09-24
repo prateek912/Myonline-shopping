@@ -28,7 +28,8 @@
 	window.menu = '${title}';
 	window.contextRoot = '${contextRoot}'
 </script>
-
+<!-- For Font in bootstrap -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <!-- Variable CSS that is created at the TOP -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">

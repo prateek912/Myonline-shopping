@@ -86,8 +86,6 @@ public class ManagementController {
 			// Custom Product Validation
 			new ProductValidator().validate(newProduct, result);
 		} else {
-			logger.info("Not a new Product :" + newProduct.getId());
-			logger.info("Code of the Product :" + newProduct.getCode());
 			// Check only for correct file type
 			if (!newProduct.getFile().getOriginalFilename().equals("")) {
 				new ProductValidator().validate(newProduct, result);
@@ -151,12 +149,10 @@ public class ManagementController {
 		mv.addObject("title", "Manage Products");
 
 		// Fetch the product from database
-		Product product = productDao.getProductById(id);
-		logger.info("Fetch Product for Edit :" + product.toString());
+		//Product product = productDao.getProductById(id);
 		// set the fetch product
-		logger.info("Code of the Product :" + product.getCode());
-		mv.addObject("product", product);
-
+		mv.addObject("product", productDao.getProductById(id));
+		logger.info("Code of the Product :" +  productDao.getProductById(id).getCode());
 		return mv;
 	}
 

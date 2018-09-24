@@ -174,7 +174,7 @@
 			</div>
 		</div>
 
-		<!-- Admin table where admin can view all the product that are presernt in Database -->
+		<!-- Admin table where admin can view all the product that are present in Database -->
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="row">

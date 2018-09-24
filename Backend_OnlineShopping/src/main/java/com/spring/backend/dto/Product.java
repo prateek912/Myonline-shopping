@@ -12,7 +12,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -57,6 +56,10 @@ public class Product {
 		this.code = "PRD"+UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 	
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public MultipartFile getFile() {
 		return file;
 	}

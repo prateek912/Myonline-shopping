@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+	<!-- Variable of User class to map -->
+	<var name="user" class="com.spring.backend.dto.User"/>
+	<var name="billing" class="com.spring.backend.dto.Address"/>
+
+	<!-- Returning and adding User and address object inside the flow -->
+	<on-start>
+		<evaluate expression="registerHandler.init()" result="flowScope.registerModel"/>
+	</on-start>
+
+	<!-- Start state -->
+	<view-state id="personal" view="/flows/register/signup-personal" model="user">
+		<transition on="billing" to="billing" />
+		<on-exit>
+			<evaluate expression="registerHandler.addUser(flowScope.registerModel,user)" />
+		</on-exit>
+	</view-state>
+	<view-state id="billing" view="/flows/register/signup-billing" model="billing">
+		<transition on="confirm" to="confirm"/>
+		<transition on="personal" to="personal" />
+		<on-exit>
+			<evaluate expression="registerHandler.addBilling(flowScope.registerModel,billing)" />
+		</on-exit>
+	</view-state>
+	<view-state id="confirm" view="/flows/register/signup-confirm" model="flowScope.registerModel">
+		<transition on="billing" to="billing"/>
+		<transition on="personal" to="personal" />
+		<transition on="success" to="success" />
+	</view-state>
+	
+	<!-- End state -->
+	<!-- Have to above Global transition tag -->
+	<end-state id="home" view="externalRedirect:contextRelative:/" />
+	<end-state id="success" view="/flows/register/signup-success" />
+	
+	<!-- GLobal transition -->
+	<global-transitions>
+		<transition on="home" to="home"/>
+	</global-transitions>
+	
+	
+</flow>                          
