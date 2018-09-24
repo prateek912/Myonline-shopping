@@ -29,7 +29,7 @@ public class HibernateConfig {
 	
 	
 	// DataSource bean for providing connection information
-	@Bean
+	@Bean("dataSource")
 	public DataSource getDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(dbDriver);

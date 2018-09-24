@@ -26,6 +26,16 @@ $(function(){
 	}
 });
 
+// To tackle csrf token 
+var token = $("meta[name='_csrf']").attr('content');
+var header = "X-CSRF-TOKEN";
+
+if(token.length > 0 && header.length > 0){
+	// set the token and header for AJAX request
+	 $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	 });
+}
 
 // Code for JQuery data table
 
@@ -275,5 +285,45 @@ if($cateogryForm.length){
 			element.parents(".validate").addClass("has-feedback");	
 
 		}	
+	});
+}
+
+
+// Validating Login Form
+var $loginForm = $('#loginForm');
+if($loginForm.length){
+	$loginForm.validate({
+		rules : {
+			email : {
+				required: true,
+				email : true
+			},
+			password : {
+				required: true
+			}
+		},
+		messages: {					
+			name: {
+				required: 'Please enter email address!',
+				email : 'Please enter a valid email address!'	
+			},
+			description: {
+				required: 'Please enter password!'
+			}					
+		},
+		errorElement : "em",
+		errorPlacement : function(error, element) {
+			// Add the 'help-block' class to the error element
+			error.addClass("help-block");
+			
+			// add the error label after the input element
+			error.insertAfter(element);
+			
+			
+			// add the has-feedback class to the
+			// parent div.validate in order to add icons to inputs
+			element.parents(".validate").addClass("has-feedback");	
+
+		}
 	});
 }

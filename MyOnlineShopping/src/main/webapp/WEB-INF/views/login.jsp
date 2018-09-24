@@ -21,10 +21,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<meta name="_csrf" content="${_csrf.token}">
-
-<!-- To make sure AJAX request works fine without any 403 -->
-
 <title>Online Shopping - ${title}</title>
 
 <!-- For Showing Active Menu on Page -->
@@ -33,7 +29,9 @@
 	window.contextRoot = '${contextRoot}'
 </script>
 <!-- For Font in bootstrap -->
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <!-- Variable CSS that is created at the TOP -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
@@ -50,43 +48,62 @@
 
 	<div class="wrapper">
 		<!-- Navigation -->
-		<%@include file="./shared/nav-bar.jsp"%>
-		
-		<!-- Page Content -->
-		<div class="content">
-			<!-- Load Page content only when user clicked -->
-			<c:if test="${userClickedHome == true}">
-				<!-- Page Content -->
-				<%@include file="home.jsp"%>
-			</c:if>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="${contextRoot}/home">Online Shopping</a>
+				</div>
+			</div>
+		</nav>
 
-			<!-- Load About page only if User click -->
-			<c:if test="${userClickedAbout == true}">
-				<!-- Page Content -->
-				<%@include file="about.jsp"%>
+		<!-- Login Form -->
+		<div class="container">
+			<!-- To display Invalid UserName and Password Message -->
+			<c:if test="${not empty message}">
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<div class="alert alert-danger">${message}</div>
+					</div>
+				</div>
 			</c:if>
-
-			<!-- Load Contact page only if User click -->
-			<c:if test="${userClickedContact == true}">
-				<!-- Page Content -->
-				<%@include file="contact.jsp"%>
-			</c:if>
-			
-			<!-- Load when user clicked Products -->
-			<c:if test="${userClickedAllProducts == true or userClickedCatProducts == true}">
-				<%@include file="listProducts.jsp"%>
-			</c:if>
-			
-			<!-- For loading single product page -->
-			<c:if test="${userClickedShowProduct == true}">
-				<%@include file="singleProduct.jsp" %>
-			</c:if>
-			
-			<!-- For loading Manage Product page -->
-			<c:if test="${userClickedManage == true}">
-				<%@include file="productManage.jsp" %>
-			</c:if>
-			
+			<div class="row">
+				<div class="col-md-offset-3 col-md-6">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h4>Login</h4>
+						</div>
+						<div class="panel-body">
+							<form action="${contextRoot}/login" method="post"
+								class="form-horizontal" id="loginForm">
+								<div class="form-group">
+									<label for="username" class="col-md-4 control-label">Email
+										:</label>
+									<div class="col-md-8">
+										<input type="text" name="email" id="email"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="col-md-4 control-label">Password
+										:</label>
+									<div class="col-md-8">
+										<input type="password" name="password" id="password"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-8 col-md-offset-4">
+										<input type="submit" value="Login" class="btn btn-primary" />
+									</div>
+								</div>
+								<!-- For CSRF protection -->
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- Footer  -->
@@ -95,12 +112,6 @@
 		<!-- Bootstrap core JavaScript -->
 		<script src="${js}/jquery.js"></script>
 		<script src="${js}/bootstrap.bundle.min.js"></script>
-		<!-- JQuery DataTable Plugin -->
-		<script src="${js}/jquery.dataTables.js"></script>
-		<!-- JQuery DataTable Design -->
-		<script src="${js}/dataTables.bootstrap4.js"></script>
-		<!-- Bootbox for alert and dialog box -->
-		<script src="${js}/bootbox.min.js"></script>
 		<!-- Jquery Validation JavaScript -->
 		<script src="${js}/jquery.validate.js"></script>
 		<!-- Linking my own JS file -->
