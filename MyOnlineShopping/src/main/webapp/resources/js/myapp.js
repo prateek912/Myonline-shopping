@@ -26,16 +26,15 @@ $(function(){
 	}
 });
 
-// To tackle csrf token 
+// To tackle csrf token
 var token = $("meta[name='_csrf']").attr('content');
 var header = "X-CSRF-TOKEN";
 
-if(token.length > 0 && header.length > 0){
-	// set the token and header for AJAX request
-	 $(document).ajaxSend(function(e, xhr, options) {
-	        xhr.setRequestHeader(header, token);
-	 });
-}
+// set the token and header for AJAX request
+ $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+ });
+
 
 // Code for JQuery data table
 
@@ -102,12 +101,22 @@ if($table.length){
 					str += '<a href="'+window.contextRoot+'/show/'+data+'/product" class="btn btn-primary">'+
 											'View</a>'+' ';
 					if(window.quantity > 0){
-						str +='<a href="'+window.contextRoot+'/cart/add/'+data+'/product"class="btn btn-success">'+
-						'Add To Cart</a>';
+						if(userRole == 'ADMIN'){
+							str +='<a href="'+window.contextRoot+'/manage/'+data+'/product"class="btn btn-warning">'+
+							'Edit</a>';	
+						}else{
+							str +='<a href="'+window.contextRoot+'/cart/add/'+data+'/product"class="btn btn-success">'+
+							'Add To Cart</a>';	
+						}
 					}else{
-						str +='<a href="'+window.contextRoot+'/cart/add/'+data+
-						'/product" class="btn btn-success disabled">'+
-						'Add To Cart</a>';
+						if(userRole == 'ADMIN'){
+							str +='<a href="'+window.contextRoot+'/manage/'+data+'/product"class="btn btn-warning">'+
+							'Edit</a>';	
+						}else{
+							str +='<a href="'+window.contextRoot+'/cart/add/'+data+
+							'/product" class="btn btn-success disabled">'+
+							'Add To Cart</a>';
+						}
 					}
 					return str;
 				}
@@ -192,8 +201,7 @@ if($adminTable.length){
 				mRender : function(data,type,row){
 					var str = '';
 					str+= '<a href="'+window.contextRoot+'/manage/'+data+'/product"'+
-						'class="btn btn-warning"> <span'+
-						'class="glyphicon glyphicon-pencil"></span></a>';
+						'class="btn btn-warning">Edit</a>';
 					
 					return str;
 				}
@@ -218,7 +226,7 @@ if($adminTable.length){
 					callback : function(confirmed){
 						// Whether user has confirmed or not
 						if(confirmed){
-							// Now we have to make changes in database 
+							// Now we have to make changes in database
 							var activationUrl = window.contextRoot+'/manage/product/'+value+'/activation';
 							$.post(activationUrl,function(data){
 								bootbox.alert({

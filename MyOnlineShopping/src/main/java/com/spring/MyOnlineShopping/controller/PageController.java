@@ -3,9 +3,17 @@ package com.spring.MyOnlineShopping.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -130,13 +138,49 @@ public class PageController {
 	}
 	
 	@RequestMapping("/login")
-	public ModelAndView login(@RequestParam(name="error",required=false) String error) {
+	public ModelAndView login(@RequestParam(name="error",required=false) String error, 
+				@RequestParam(value="logout",required = false) String logout) {
 		ModelAndView mv = new ModelAndView("login");
 		if(error !=null) {
 			mv.addObject("message","Invalid UserName and Password!!");
+		}
+		
+		if(logout != null) {
+			mv.addObject("logout","You have succesfully logged out!!");
 		}
 		mv.addObject("title","login");
 		return mv;
 	}
 
+	// Access Denied Mapping
+	@RequestMapping("/access-denied")
+	public ModelAndView accessDenied() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("error");
+		mv.addObject("title","403 - Access Denied");
+		mv.addObject("errorTitle","Aha! Caught you");
+		mv.addObject("errorDescription","You are not authorized to view this page!");
+		
+		return mv;
+	}
+
+	
+	@RequestMapping("/perform-Logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response,HttpSession session) {
+		
+		// First we will fetch the authentication object
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null) {
+			//logout
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+			
+			if(SecurityContextHolder.getContext().getAuthentication() == null) {
+				logger.info("Successfully logged out user!!");
+			}else {
+				logger.info("Unsuccessfully logged out user!!");
+			}
+		}
+		
+		return "redirect:/login?logout";
+	}
 }

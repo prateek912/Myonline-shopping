@@ -48,13 +48,16 @@
 
 	<div class="wrapper">
 		<!-- Navigation -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div class="container">
-				<div class="navbar-header">
-					<a href="${contextRoot}/home">Online Shopping</a>
+				<div class="row">
+					<div class="navbar-header">
+						<a href="${contextRoot}/home">Home</a>
+					</div>
 				</div>
 			</div>
 		</nav>
+
 
 		<!-- Login Form -->
 		<div class="container">
@@ -63,6 +66,14 @@
 				<div class="row">
 					<div class="col-md-offset-3 col-md-6">
 						<div class="alert alert-danger">${message}</div>
+					</div>
+				</div>
+			</c:if>
+			<!-- If user has logged out -->
+			<c:if test="${not empty logout}">
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<div class="alert alert-success">${logout}</div>
 					</div>
 				</div>
 			</c:if>

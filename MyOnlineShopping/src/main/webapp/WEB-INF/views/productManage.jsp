@@ -182,36 +182,38 @@
 					<hr />
 				</div>
 				<div class="row">
-					<div style="overflow: auto">
-						<table id="adminProductTable"
-							class="table table-stripped table-bordered">
-							<thead>
-								<tr>
-									<th>Id</th>
-									<th>&#160;</th>
-									<th>Name</th>
-									<th>Brand</th>
-									<th>Unit Price</th>
-									<th>Quantity</th>
-									<th>Active</th>
-									<th>Edit</th>
-								</tr>
-							</thead>
-							<!-- Table Body -->
-							<!-- Will be filled by JS -->
-							<tfoot>
-								<tr>
-									<th>Id</th>
-									<th>&#160;</th>
-									<th>Name</th>
-									<th>Brand</th>
-									<th>Unit Price</th>
-									<th>Quantity</th>
-									<th>Active</th>
-									<th>Edit</th>
-								</tr>
-							</tfoot>
-						</table>
+					<div class="container-fluid">
+						<div class="table-responsive">
+							<table id="adminProductTable"
+								class="table table-stripped table-bordered">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>&#160;</th>
+										<th>Name</th>
+										<th>Brand</th>
+										<th>Unit Price</th>
+										<th>Quantity</th>
+										<th>Active</th>
+										<th>Edit</th>
+									</tr>
+								</thead>
+								<!-- Table Body -->
+								<!-- Will be filled by JS -->
+								<tfoot>
+									<tr>
+										<th>Id</th>
+										<th>&#160;</th>
+										<th>Name</th>
+										<th>Brand</th>
+										<th>Unit Price</th>
+										<th>Quantity</th>
+										<th>Active</th>
+										<th>Edit</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -223,7 +225,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						
+
 						<h4 class="modal-title">Add New Category</h4>
 					</div>
 					<div class="modal-body">
@@ -236,7 +238,7 @@
 								<label class="control-label col-md-4">Name</label>
 								<div class="col-md-8 validate">
 									<spring-form:input type="text" path="name" class="form-control"
-										placeholder="Category Name" id="cat_name"/>
+										placeholder="Category Name" id="cat_name" />
 								</div>
 							</div>
 
@@ -244,7 +246,8 @@
 								<label class="control-label col-md-4">Description</label>
 								<div class="col-md-8 validate">
 									<spring-form:textarea path="description" class="form-control"
-										placeholder="Enter category description here!" id="cat_description"/>
+										placeholder="Enter category description here!"
+										id="cat_description" />
 								</div>
 							</div>
 

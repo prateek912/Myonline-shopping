@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.spring.MyOnlineShopping.model.RegisterModel;
@@ -21,6 +22,10 @@ public class RegisterHandler {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	// For password encoding
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	public RegisterModel init() {
 		return new RegisterModel();
@@ -48,6 +53,10 @@ public class RegisterHandler {
 			cart.setUser(newUser);
 			newUser.setCart(cart);
 		}
+		
+		// Encoding password before saving it to database
+		newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+		
 		// save the user
 		userDao.addUser(newUser);
 		
@@ -66,6 +75,7 @@ public class RegisterHandler {
 		String transitionValue = "success";
 		
 		// For matching Password
+		logger.info("Validation for matching Password and Confirm password");
 		if(!(user.getPassword().equals(user.getConfirmPassword()))) {
 			transitionValue = "failure";
 			error.addMessage(new MessageBuilder()
@@ -75,6 +85,7 @@ public class RegisterHandler {
 		}
 		
 		// For uniqueness of email id
+		logger.info("Validation for Uniqieness of user entered email :"+user.getEmail());
 		if(userDao.getUserByEmail(user.getEmail()) != null) {
 			error.addMessage(new MessageBuilder()
 					.error().source("email")

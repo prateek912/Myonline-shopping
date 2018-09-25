@@ -64,3 +64,8 @@ footer {
 	width : 50px;
 }
 
+/*For responsive table*/
+.table-responsive{
+	overflow-x : inherit;
+}
+

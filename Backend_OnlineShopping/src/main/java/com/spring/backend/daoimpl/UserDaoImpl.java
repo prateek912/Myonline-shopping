@@ -66,7 +66,8 @@ public class UserDaoImpl implements UserDao{
 						.getSingleResult();
 			return user;
 		} catch (Exception e) {
-			logger.error("Exception while Fetching user by email!!",e);
+			logger.error("Exception while Fetching user by email!! This exception might happened when a new user"
+					+ "sign up and check for email is happened!!");
 			return null;
 		}
 	}
