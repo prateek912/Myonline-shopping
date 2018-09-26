@@ -56,7 +56,7 @@ public class GlobalController {
 				return userModel;
 			}
 		}else {
-			logger.info("User session is still active :"+userModel.getEmail());
+			logger.info("User session is still active :"+(UserModel) session.getAttribute("model"));
 		}
 		
 		return (UserModel) session.getAttribute("model");

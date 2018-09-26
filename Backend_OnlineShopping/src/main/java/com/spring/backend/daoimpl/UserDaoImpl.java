@@ -47,17 +47,6 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public boolean udpateCart(Cart cart) {
-		try {
-			factory.getCurrentSession().update(cart);
-			return true;
-		} catch (Exception e) {
-			logger.error("Exception Occured while updating User Cart!!",e);
-			return false;
-		}
-	}
-
-	@Override
 	public User getUserByEmail(String email) {
 		String str = "from User where email =:email";
 		try {

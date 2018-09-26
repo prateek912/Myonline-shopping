@@ -99,23 +99,23 @@ if($table.length){
 					// URL to show the Product
 					var str = '';
 					str += '<a href="'+window.contextRoot+'/show/'+data+'/product" class="btn btn-primary">'+
-											'View</a>'+' ';
+											'<i class="fa fa-eye"></i></a>'+' ';
 					if(window.quantity > 0){
 						if(userRole == 'ADMIN'){
 							str +='<a href="'+window.contextRoot+'/manage/'+data+'/product"class="btn btn-warning">'+
-							'Edit</a>';	
+							'<i class="fa fa-pencil"></i></a>';	
 						}else{
 							str +='<a href="'+window.contextRoot+'/cart/add/'+data+'/product"class="btn btn-success">'+
-							'Add To Cart</a>';	
+							'<i class="fa fa-shopping-cart"></i></a>';	
 						}
 					}else{
 						if(userRole == 'ADMIN'){
 							str +='<a href="'+window.contextRoot+'/manage/'+data+'/product"class="btn btn-warning">'+
-							'Edit</a>';	
+							'<i class="fa fa-pencil"></i></a>';	
 						}else{
 							str +='<a href="'+window.contextRoot+'/cart/add/'+data+
 							'/product" class="btn btn-success disabled">'+
-							'Add To Cart</a>';
+							'<i class="fa fa-shopping-cart"></a>';
 						}
 					}
 					return str;
@@ -201,7 +201,7 @@ if($adminTable.length){
 				mRender : function(data,type,row){
 					var str = '';
 					str+= '<a href="'+window.contextRoot+'/manage/'+data+'/product"'+
-						'class="btn btn-warning">Edit</a>';
+						'class="btn btn-warning"><i class="fa fa-pencil"></i></a>';
 					
 					return str;
 				}
@@ -335,3 +335,43 @@ if($loginForm.length){
 		}
 	});
 }
+
+
+// Cart refresh button functionality
+$('button[name="refreshCart"]').click(function(){
+	
+	//Fetch cartLine id
+	var cartLineId = $(this).attr('value');
+	var quantity = $('#count_'+cartLineId);
+	
+	// Get original count
+	var originalCount = quantity.attr('value');
+	var currentCount = quantity.val();
+
+	// Only when count has been changed
+	if(currentCount !== originalCount){
+		
+		if(currentCount < 1){
+			// reverting it back to original count
+			quantity.val(originalCount);
+			
+			// Giving user alert
+			bootbox.alert({
+				size : 'medium',
+				title : 'Error',
+				message : 'Quantity can not be less than 1'
+			});
+		}else{
+			// Creating a new Url to hit update count controller method
+			var updatedUrl = window.contextRoot+'/cart/'+cartLineId+'/update?count='+currentCount;
+			console.log("Updated Url :"+updatedUrl);
+			
+			// Forward it to controller
+			window.location.href = updatedUrl;
+		}
+		
+		
+	}
+	
+	
+});

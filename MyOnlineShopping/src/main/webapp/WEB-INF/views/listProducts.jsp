@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>

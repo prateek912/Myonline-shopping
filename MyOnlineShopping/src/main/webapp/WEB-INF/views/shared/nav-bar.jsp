@@ -55,8 +55,8 @@
 								<ul class="dropdown-menu">
 									<security:authorize access="hasAuthority('USER')">
 										<li>
-											<!-- Cart of the user --> <a href="${contextRoot}/cart">Cart
-												<span class="badge">${model.cart.cartLines}</span>-
+											<!-- Cart of the user --> <a href="${contextRoot}/cart/show">Cart
+												${model.cart.cartLines} -
 												&#8377;${model.cart.grandTotal}
 										</a>
 										</li>

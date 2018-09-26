@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -45,7 +47,7 @@
 						<c:when test="${product.quantity > 0}">
 							<h6>Quantity Left : ${product.quantity}</h6>
 							<a href="${contextRoot}/cart/add/${product.id}/product"
-								class="btn btn-success">Add To Cart</a>
+								class="btn btn-success"><i class="fa fa-shopping-cart"></i></a>
 							<a href="${contextRoot}/show/all/products"
 								class="btn btn-primary">Back</a>
 						</c:when>
@@ -54,7 +56,7 @@
 								Quantity Left : <span style="color: red">Out of Stock!!</span>
 							</h6>
 							<a href="${contextRoot}/cart/add/${product.id}/product"
-								class="btn btn-success disabled">Add To Cart</a>
+								class="btn btn-success disabled"><i class="fa fa-shopping-cart"></i></a>
 							<a href="${contextRoot}/show/all/products"
 								class="btn btn-primary">Back</a>
 						</c:otherwise>
@@ -64,7 +66,9 @@
 				<!-- For Admin -->
 				<security:authorize access="hasAuthority('ADMIN')">
 					<a href="${contextRoot}/manage/${product.id}/product"
-								class="btn btn-success warning">Edit</a>
+								class="btn btn-success warning"><i class="fa fa-pencil"></i></a>
+					<a href="${contextRoot}/show/all/products"
+								class="btn btn-primary">Back</a>			
 				</security:authorize>
 			</div>
 		</div>

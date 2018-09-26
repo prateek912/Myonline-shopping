@@ -15,6 +15,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,6 +86,11 @@
 			<!-- For loading Manage Product page -->
 			<c:if test="${userClickedManage == true}">
 				<%@include file="productManage.jsp" %>
+			</c:if>
+			
+			<!-- For loading Manage Product page -->
+			<c:if test="${userClickedShowCart == true}">
+				<%@include file="cart.jsp" %>
 			</c:if>
 			
 		</div>
